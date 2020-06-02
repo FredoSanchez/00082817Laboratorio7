@@ -1,6 +1,6 @@
 enum lines {NOLINE,SINGLELINE,DOUBLELINE};
 enum modes {NOMODE,INT_FLOAT,INT_FLOAT_FLOAT,INT_INT_INT_INT};
-enum parameters {ADJECTIVE_VELOCITY,DYNAMIC_VISCOSITY,DENSITY,EXTERNAL_FORCE_X,EXTERNAL_FORCE_Y};
+enum parameters {TAU_CONST, KAPPA_CONST, LAMBDA_CONST, IPSILON_CONST, DELTA_CONST, PSI_CONST, ETA_CONST};
 enum sizes {NODES,ELEMENTS,DIRICHLET};
 enum coords {EQUIS,YE};
 
@@ -109,7 +109,7 @@ class condition: public item{
 };
 
 class mesh{
-        float parameters[5];
+        float parameters[7];
         int sizes[3];
         node *node_list;
         element *element_list;
@@ -117,12 +117,14 @@ class mesh{
         condition *dirichlet_list;
         //condition *neumann_list;
     public:
-        void setParameters(float u_bar,float nu, float rho, float f_x, float f_y){
-            parameters[ADJECTIVE_VELOCITY]=u_bar;
-            parameters[DYNAMIC_VISCOSITY]=nu;
-            parameters[DENSITY]=rho;
-            parameters[EXTERNAL_FORCE_X]=f_x;
-            parameters[EXTERNAL_FORCE_Y]=f_y;
+        void setParameters(float tau,float kappa, float lambda, float ipsilon, float delta, float psi, float eta){
+            parameters[TAU_CONST]=tau;
+            parameters[KAPPA_CONST]=kappa;
+            parameters[LAMBDA_CONST]=lambda;
+            parameters[IPSILON_CONST]=ipsilon;
+            parameters[DELTA_CONST]=delta;
+            parameters[PSI_CONST]=psi;
+            parameters[ETA_CONST]=eta;
         }
         void setSizes(int nnodes,int neltos,int ndirich){
             sizes[NODES] = nnodes;
